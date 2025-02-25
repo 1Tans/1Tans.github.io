@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>with you</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>with you</h1>
+
+    <h2>Our Gallery</h2>
+    <div class="gallery">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_3.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_4.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_5.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_6.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_7.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_8.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_9.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_10.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_11.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_12.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_13.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_14.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_15.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_16.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_17.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_18.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_19.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_20.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_21.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_22.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_23.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_24.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_31.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/LINE_ALBUM_เธอมีเขา ปอป้อมีตัน_250225_32.jpg" alt=""onclick="openModal(this)">
+        <img src="Photo/S__7700498.jpg" alt="">
+    </div>
+    
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <img id="modalImg" src="" alt="">
+    </div>
+
+    <p id="counter"></p>
+
+    <script>
+        function countDays(startDate) {
+            let start = new Date(startDate);
+            let now = new Date();
+            let diffTime = now - start;
+            let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            let years = Math.floor(diffDays / 365);
+            let months = Math.floor((diffDays % 365) / 30);
+            let days = (diffDays % 365) % 30;
+            document.getElementById("counter").innerText = `${years} year ${months} month ${days} day  💕`;
+        }
+        countDays("2024-09-25"); // เปลี่ยนวันที่เป็นวันเริ่มคบกัน
+
+        function openModal(img) {
+            document.getElementById("modalImg").src = img.src;
+            document.getElementById("imageModal").style.display = "flex";
+        }
+        
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+
+    <div class="hearts"></div>
+</body>
+
+</html>
