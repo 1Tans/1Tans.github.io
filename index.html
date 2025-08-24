@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>เว็บไซต์คำนวณค่า pH และ pOH</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>การพัฒนาเว็บไซต์เพื่อคำนวณหาค่า pH และ pOH ของนักเรียนระดับชั้นมัธยมศึกษาตอนปลาย โรงเรียนชลประทานวิทยา</title>
   <style>
     body {
       font-family: "Prompt", sans-serif;
@@ -58,7 +59,7 @@
       margin: 15px 0;
       border-radius: 14px;
       border-left: 8px solid #b39ddb;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .calc-box input {
       padding: 10px;
@@ -92,11 +93,19 @@
     ul li {
       margin: 8px 0;
     }
+    a {
+      color: #ca0e49;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>เว็บไซต์คำนวณค่า pH และ pOH</h1>
+    <h1>การพัฒนาเว็บไซต์เพื่อคำนวณหาค่า pH และ pOH ของนักเรียนระดับชั้นมัธยมศึกษาตอนปลาย โรงเรียนชลประทานวิทยา</h1>
   </header>
 
   <nav>
@@ -111,10 +120,18 @@
       <h2>pH (positive potential of hydrogen ions)</h2>
       <p>คือ ค่าที่แสดงถึงความเข้มข้นของไฮโดรเจนไอออน (H⁺) หรือไฮโดรเนียมไอออน (H₃O⁺) ใช้บอกความเป็นกรดหรือเบสของสารละลาย</p>
     </div>
+
     <div class="box">
       <h2>pOH (potential of hydroxide)</h2>
       <p>คือ ค่าที่ใช้วัดความเป็นเบสของสารละลาย ซึ่งเป็นค่าลอการิทึมติดลบของความเข้มข้นของไอออนไฮดรอกไซด์ (OH⁻)</p>
     </div>
+
+    <div class="box">
+      <h2>สูตรความสัมพันธ์ pH + pOH = 14</h2>
+      <p>เกิดจากสมดุลการแตกตัวของน้ำ Kw = [H⁺][OH⁻] = 1 × 10⁻¹⁴</p>
+      <p>จึงสรุปได้ว่า <b>pH + pOH = 14</b> (ที่ 25 °C)</p>
+    </div>
+    
     <div class="box">
       <h2>ข้อควรรู้</h2>
       <ul>
@@ -123,6 +140,7 @@
         <li>pH &gt; 7 → สารละลายเป็นเบส</li>
       </ul>
     </div>
+
     <div class="box">
       <h2>หมายเหตุเรื่อง "e"</h2>
       <p>ทางคณะผู้จัดทำได้กำหนดให้ <b>e</b> หมายถึง <b>ยกกำลังสิบ</b> เพื่อความสะดวกในการพิมพ์ เช่น:</p>
@@ -132,53 +150,67 @@
         <li>2.5e4 = 2.5 × 10<sup>4</sup> = 25,000</li>
       </ul>
     </div>
-  </section>
 
-  <!-- 🔹 หน้าเครื่องคิดเลข -->
+    <div class="box">
+      <h2>แบบทดสอบ</h2>
+      <ul>
+        <li><a href="https://forms.gle/niZcijHVVX1UNeLk6" target="_blank">แบบทดสอบก่อนเรียน</a></li>
+        <li><a href="https://forms.gle/6MKrMirzgwKbK2t38" target="_blank">แบบทดสอบระหว่างเรียน</a></li>
+        <li><a href="https://forms.gle/87ASYXUWkCUcnCSW9" target="_blank">แบบทดสอบหลังเรียน</a></li>
+      </ul>
+    </div>
+  </section>
+    <!-- 🔹 หน้าเครื่องคิดเลข -->
   <section id="calc">
     <div class="box calc-box">
       <h2>คำนวณค่า pH</h2>
-      <label>[H⁺] (รูปแบบวิทยาศาสตร์ เช่น 1e-3):</label><br>
-      <input type="text" id="hValueSci" placeholder="เช่น 1e-3"><br>
+      <label>[H⁺] (รูปแบบวิทยาศาสตร์ เช่น 1e-3):</label><br />
+      <input type="text" id="hValueSci" placeholder="เช่น 1e-3" /><br />
       <button onclick="calculatePH('sci')">คำนวณ</button>
-      <button onclick="resetField('hValueSci','phResultSci')">Reset</button>
+      <button onclick="resetField('hValueSci','phResultSci','phMethodSci')">Reset</button>
       <p id="phResultSci" class="result"></p>
+      <div id="phMethodSci" class="method"></div>
 
-      <label>[H⁺] (ทศนิยม เช่น 0.001):</label><br>
-      <input type="number" id="hValueDec" step="any" placeholder="เช่น 0.001"><br>
+      <label>[H⁺] (ทศนิยม เช่น 0.001):</label><br />
+      <input type="number" id="hValueDec" step="any" placeholder="เช่น 0.001" /><br />
       <button onclick="calculatePH('dec')">คำนวณ</button>
-      <button onclick="resetField('hValueDec','phResultDec')">Reset</button>
+      <button onclick="resetField('hValueDec','phResultDec','phMethodDec')">Reset</button>
       <p id="phResultDec" class="result"></p>
+      <div id="phMethodDec" class="method"></div>
     </div>
 
     <div class="box calc-box">
       <h2>คำนวณค่า pOH</h2>
-      <label>[OH⁻] (รูปแบบวิทยาศาสตร์ เช่น 1e-4):</label><br>
-      <input type="text" id="ohValueSci" placeholder="เช่น 1e-4"><br>
+      <label>[OH⁻] (รูปแบบวิทยาศาสตร์ เช่น 1e-4):</label><br />
+      <input type="text" id="ohValueSci" placeholder="เช่น 1e-4" /><br />
       <button onclick="calculatePOH('sci')">คำนวณ</button>
-      <button onclick="resetField('ohValueSci','pohResultSci')">Reset</button>
+      <button onclick="resetField('ohValueSci','pohResultSci','pohMethodSci')">Reset</button>
       <p id="pohResultSci" class="result"></p>
+      <div id="pohMethodSci" class="method"></div>
 
-      <label>[OH⁻] (ทศนิยม เช่น 0.0001):</label><br>
-      <input type="number" id="ohValueDec" step="any" placeholder="เช่น 0.0001"><br>
+      <label>[OH⁻] (ทศนิยม เช่น 0.0001):</label><br />
+      <input type="number" id="ohValueDec" step="any" placeholder="เช่น 0.0001" /><br />
       <button onclick="calculatePOH('dec')">คำนวณ</button>
-      <button onclick="resetField('ohValueDec','pohResultDec')">Reset</button>
+      <button onclick="resetField('ohValueDec','pohResultDec','pohMethodDec')">Reset</button>
       <p id="pohResultDec" class="result"></p>
+      <div id="pohMethodDec" class="method"></div>
     </div>
 
     <div class="box calc-box">
       <h2>สูตรความสัมพันธ์ pH + pOH = 14</h2>
-      <label>กรอกค่า pH: </label><br>
-      <input type="number" id="phInput" step="any" placeholder="เช่น 3.5"><br>
+      <label>กรอกค่า pH: </label><br />
+      <input type="number" id="phInput" step="any" placeholder="เช่น 3.5" /><br />
       <button onclick="calcFromPH()">หาค่า pOH</button>
-      <button onclick="resetField('phInput','fromPHResult')">Reset</button>
+      <button onclick="resetField('phInput','fromPHResult','fromPHMethod')">Reset</button>
       <p id="fromPHResult" class="result"></p>
+      <div id="fromPHMethod" class="method"></div>
 
-      <label>กรอกค่า pOH: </label><br>
-      <input type="number" id="pohInput" step="any" placeholder="เช่น 4.2"><br>
+      <label>กรอกค่า pOH: </label><br />
+      <input type="number" id="pohInput" step="any" placeholder="เช่น 4.2" /><br />
       <button onclick="calcFromPOH()">หาค่า pH</button>
-      <button onclick="resetField('pohInput','fromPOHResult')">Reset</button>
+      <button onclick="resetField('pohInput','fromPOHResult','fromPOHMethod')">Reset</button>
       <p id="fromPOHResult" class="result"></p>
+      <div id="fromPOHMethod" class="method"></div>
     </div>
   </section>
 
@@ -203,7 +235,7 @@
 
     // สลับหน้าที่แสดง
     function showSection(sectionId) {
-      document.querySelectorAll("section").forEach(sec => {
+      document.querySelectorAll("section").forEach((sec) => {
         sec.classList.remove("active");
       });
       document.getElementById(sectionId).classList.add("active");
@@ -211,70 +243,81 @@
 
     // ฟังก์ชันคำนวณ pH
     function calculatePH(type) {
-      let h;
-      if (type === 'sci') {
+      let h, ph;
+      if (type === "sci") {
         h = parseFloat(document.getElementById("hValueSci").value);
         if (isNaN(h) || h <= 0) {
           alert("กรุณากรอกค่า [H⁺] ที่ถูกต้อง (รูปแบบวิทยาศาสตร์)");
           return;
         }
-        document.getElementById("phResultSci").innerText = `ค่า pH = ${(-log10(h)).toFixed(2)}`;
+        ph = -log10(h);
+        document.getElementById("phResultSci").innerText = `ค่า pH = ${ph.toFixed(2)}`;
+        document.getElementById("phMethodSci").innerHTML = `วิธีทำ:<br>[H⁺] = ${h}<br>pH = -log[H⁺]<br>= -log(${h})<br>= ${ph.toFixed(2)}`;
       } else {
         h = parseFloat(document.getElementById("hValueDec").value);
         if (isNaN(h) || h <= 0) {
           alert("กรุณากรอกค่า [H⁺] ที่ถูกต้อง (ทศนิยม)");
           return;
         }
-        document.getElementById("phResultDec").innerText = `ค่า pH = ${(-log10(h)).toFixed(2)}`;
+        ph = -log10(h);
+        document.getElementById("phResultDec").innerText = `ค่า pH = ${ph.toFixed(2)}`;
+        document.getElementById("phMethodDec").innerHTML = `วิธีทำ:<br>[H⁺] = ${h}<br>pH = -log[H⁺]<br>= -log(${h})<br>= ${ph.toFixed(2)}`;
       }
     }
 
     // ฟังก์ชันคำนวณ pOH
     function calculatePOH(type) {
-      let oh;
-      if (type === 'sci') {
+      let oh, poh;
+      if (type === "sci") {
         oh = parseFloat(document.getElementById("ohValueSci").value);
         if (isNaN(oh) || oh <= 0) {
           alert("กรุณากรอกค่า [OH⁻] ที่ถูกต้อง (รูปแบบวิทยาศาสตร์)");
           return;
         }
-        document.getElementById("pohResultSci").innerText = `ค่า pOH = ${(-log10(oh)).toFixed(2)}`;
+        poh = -log10(oh);
+        document.getElementById("pohResultSci").innerText = `ค่า pOH = ${poh.toFixed(2)}`;
+        document.getElementById("pohMethodSci").innerHTML = `วิธีทำ:<br>[OH⁻] = ${oh}<br>pOH = -log[OH⁻]<br>= -log(${oh})<br>= ${poh.toFixed(2)}`;
       } else {
         oh = parseFloat(document.getElementById("ohValueDec").value);
         if (isNaN(oh) || oh <= 0) {
           alert("กรุณากรอกค่า [OH⁻] ที่ถูกต้อง (ทศนิยม)");
           return;
         }
-        document.getElementById("pohResultDec").innerText = `ค่า pOH = ${(-log10(oh)).toFixed(2)}`;
+        poh = -log10(oh);
+        document.getElementById("pohResultDec").innerText = `ค่า pOH = ${poh.toFixed(2)}`;
+        document.getElementById("pohMethodDec").innerHTML = `วิธีทำ:<br>[OH⁻] = ${oh}<br>pOH = -log[OH⁻]<br>= -log(${oh})<br>= ${poh.toFixed(2)}`;
       }
     }
 
-    // ฟังก์ชันหาค่า pOH จาก pH
+    // ✅ ฟังก์ชันหาค่า pOH จาก pH (แยกอยู่นอก calcFromPH แล้ว)
     function calcFromPH() {
-      let ph = parseFloat(document.getElementById("phInput").value);
+      const ph = parseFloat(document.getElementById("phInput").value);
       if (!isNaN(ph)) {
-        let poh = 14 - ph;
+        const poh = 14 - ph;
         document.getElementById("fromPHResult").innerText = `ค่า pOH = ${poh.toFixed(2)}`;
+        document.getElementById("fromPHMethod").innerHTML = `วิธีทำ:<br>pH + pOH = 14<br>pOH = 14 - pH<br>= 14 - ${ph}<br>= ${poh.toFixed(2)}`;
       } else {
         alert("กรุณากรอกค่า pH ที่ถูกต้อง");
       }
     }
 
-    // ฟังก์ชันหาค่า pH จาก pOH
+    // ✅ ฟังก์ชันหาค่า pH จาก pOH (แยกฟังก์ชันออกมาเรียบร้อย)
     function calcFromPOH() {
-      let poh = parseFloat(document.getElementById("pohInput").value);
+      const poh = parseFloat(document.getElementById("pohInput").value);
       if (!isNaN(poh)) {
-        let ph = 14 - poh;
+        const ph = 14 - poh;
         document.getElementById("fromPOHResult").innerText = `ค่า pH = ${ph.toFixed(2)}`;
+        document.getElementById("fromPOHMethod").innerHTML = `วิธีทำ:<br>pH + pOH = 14<br>pH = 14 - pOH<br>= 14 - ${poh}<br>= ${ph.toFixed(2)}`;
       } else {
         alert("กรุณากรอกค่า pOH ที่ถูกต้อง");
       }
     }
 
     // ฟังก์ชัน reset ช่องและคำตอบ
-    function resetField(inputId, resultId) {
+    function resetField(inputId, resultId, methodId) {
       document.getElementById(inputId).value = "";
       document.getElementById(resultId).innerText = "";
+      if (methodId) document.getElementById(methodId).innerText = "";
     }
   </script>
 </body>
