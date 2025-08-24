@@ -6,120 +6,275 @@
   <style>
     body {
       font-family: "Prompt", sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      background: linear-gradient(135deg, #b3e5fc, #ffffff);
       margin: 0;
       padding: 0;
     }
     header {
-      background: #4a90e2;
+      background: #b39ddb;
       color: white;
-      padding: 20px;
+      text-align: center;
+      padding: 25px;
+      border-bottom: 5px solid #f3ee9f;
     }
     nav {
-      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      background: #ff7cb1;
+      padding: 12px;
     }
     nav button {
-      margin: 5px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #4a90e2;
-      color: white;
-      font-size: 16px;
+      background: white;
+      border: 2px solid #cb048f;
+      margin: 0 12px;
+      font-size: 18px;
       cursor: pointer;
+      color: #ca0e49;
+      padding: 10px 18px;
+      border-radius: 10px;
+      transition: 0.3s;
     }
     nav button:hover {
-      background: #357abd;
+      background: #affcff;
+      color: rgb(9, 4, 27);
+      border-color: #9d0176;
     }
     section {
       display: none;
-      margin: 20px auto;
-      max-width: 400px;
+      padding: 20px;
+      max-width: 850px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      color: #5e35b1;
+    }
+    .box {
       background: white;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin: 15px 0;
+      border-radius: 14px;
+      border-left: 8px solid #b39ddb;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    input {
-      padding: 8px;
-      margin: 10px 0;
-      width: 80%;
+    .calc-box input {
+      padding: 10px;
+      margin: 8px 0;
+      width: 70%;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 8px;
     }
-    button.calc {
-      background: #50c878;
-      margin-top: 10px;
+    .calc-box button {
+      padding: 8px 14px;
+      margin: 5px 4px;
+      background: #b39ddb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    button.calc:hover {
-      background: #3da766;
+    .calc-box button:hover {
+      background: #ffb74d;
     }
-    p.result {
+    .result {
       font-weight: bold;
-      font-size: 18px;
+      margin-top: 10px;
       color: #333;
-      margin-top: 15px;
+      font-size: 18px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin: 8px 0;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>เว็บไซต์คำนวณค่า pH และ pOH</h1>
-    <p>เลือกการคำนวณที่ต้องการ</p>
   </header>
 
   <nav>
-    <button onclick="showSection('ph')">คำนวณค่า pH</button>
-    <button onclick="showSection('poh')">คำนวณค่า pOH</button>
+    <button onclick="showSection('home')">หน้าหลัก</button>
+    <button onclick="showSection('calc')">คำนวณ</button>
+    <button onclick="showSection('about')">ผู้จัดทำ</button>
   </nav>
 
-  <!-- ส่วนคำนวณ pH -->
-  <section id="ph">
-    <h2>คำนวณค่า pH</h2>
-    <label>กรอกค่า [H⁺] (mol/L):</label><br>
-    <input type="number" id="hValue" step="any" placeholder="เช่น 1e-3"><br>
-    <button class="calc" onclick="calculatePH()">คำนวณ</button>
-    <p id="phResult" class="result"></p>
+  <!-- 🔹 หน้าหลัก -->
+  <section id="home" class="active">
+    <div class="box">
+      <h2>pH (positive potential of hydrogen ions)</h2>
+      <p>คือ ค่าที่แสดงถึงความเข้มข้นของไฮโดรเจนไอออน (H⁺) หรือไฮโดรเนียมไอออน (H₃O⁺) ใช้บอกความเป็นกรดหรือเบสของสารละลาย</p>
+    </div>
+    <div class="box">
+      <h2>pOH (potential of hydroxide)</h2>
+      <p>คือ ค่าที่ใช้วัดความเป็นเบสของสารละลาย ซึ่งเป็นค่าลอการิทึมติดลบของความเข้มข้นของไอออนไฮดรอกไซด์ (OH⁻)</p>
+    </div>
+    <div class="box">
+      <h2>ข้อควรรู้</h2>
+      <ul>
+        <li>pH &lt; 7 → สารละลายเป็นกรด</li>
+        <li>pH = 7 → สารละลายเป็นกลาง</li>
+        <li>pH &gt; 7 → สารละลายเป็นเบส</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h2>หมายเหตุเรื่อง "e"</h2>
+      <p>ทางคณะผู้จัดทำได้กำหนดให้ <b>e</b> หมายถึง <b>ยกกำลังสิบ</b> เพื่อความสะดวกในการพิมพ์ เช่น:</p>
+      <ul>
+        <li>1e-3 = 1 × 10<sup>-3</sup> = 0.001</li>
+        <li>5e-2 = 5 × 10<sup>-2</sup> = 0.05</li>
+        <li>2.5e4 = 2.5 × 10<sup>4</sup> = 25,000</li>
+      </ul>
+    </div>
   </section>
 
-  <!-- ส่วนคำนวณ pOH -->
-  <section id="poh">
-    <h2>คำนวณค่า pOH</h2>
-    <label>กรอกค่า [OH⁻] (mol/L):</label><br>
-    <input type="number" id="ohValue" step="any" placeholder="เช่น 1e-4"><br>
-    <button class="calc" onclick="calculatePOH()">คำนวณ</button>
-    <p id="pohResult" class="result"></p>
+  <!-- 🔹 หน้าเครื่องคิดเลข -->
+  <section id="calc">
+    <div class="box calc-box">
+      <h2>คำนวณค่า pH</h2>
+      <label>[H⁺] (รูปแบบวิทยาศาสตร์ เช่น 1e-3):</label><br>
+      <input type="text" id="hValueSci" placeholder="เช่น 1e-3"><br>
+      <button onclick="calculatePH('sci')">คำนวณ</button>
+      <button onclick="resetField('hValueSci','phResultSci')">Reset</button>
+      <p id="phResultSci" class="result"></p>
+
+      <label>[H⁺] (ทศนิยม เช่น 0.001):</label><br>
+      <input type="number" id="hValueDec" step="any" placeholder="เช่น 0.001"><br>
+      <button onclick="calculatePH('dec')">คำนวณ</button>
+      <button onclick="resetField('hValueDec','phResultDec')">Reset</button>
+      <p id="phResultDec" class="result"></p>
+    </div>
+
+    <div class="box calc-box">
+      <h2>คำนวณค่า pOH</h2>
+      <label>[OH⁻] (รูปแบบวิทยาศาสตร์ เช่น 1e-4):</label><br>
+      <input type="text" id="ohValueSci" placeholder="เช่น 1e-4"><br>
+      <button onclick="calculatePOH('sci')">คำนวณ</button>
+      <button onclick="resetField('ohValueSci','pohResultSci')">Reset</button>
+      <p id="pohResultSci" class="result"></p>
+
+      <label>[OH⁻] (ทศนิยม เช่น 0.0001):</label><br>
+      <input type="number" id="ohValueDec" step="any" placeholder="เช่น 0.0001"><br>
+      <button onclick="calculatePOH('dec')">คำนวณ</button>
+      <button onclick="resetField('ohValueDec','pohResultDec')">Reset</button>
+      <p id="pohResultDec" class="result"></p>
+    </div>
+
+    <div class="box calc-box">
+      <h2>สูตรความสัมพันธ์ pH + pOH = 14</h2>
+      <label>กรอกค่า pH: </label><br>
+      <input type="number" id="phInput" step="any" placeholder="เช่น 3.5"><br>
+      <button onclick="calcFromPH()">หาค่า pOH</button>
+      <button onclick="resetField('phInput','fromPHResult')">Reset</button>
+      <p id="fromPHResult" class="result"></p>
+
+      <label>กรอกค่า pOH: </label><br>
+      <input type="number" id="pohInput" step="any" placeholder="เช่น 4.2"><br>
+      <button onclick="calcFromPOH()">หาค่า pH</button>
+      <button onclick="resetField('pohInput','fromPOHResult')">Reset</button>
+      <p id="fromPOHResult" class="result"></p>
+    </div>
+  </section>
+
+  <!-- 🔹 หน้าผู้จัดทำ -->
+  <section id="about">
+    <div class="box">
+      <h2>คณะผู้จัดทำ (ม.6/3)</h2>
+      <ul>
+        <li>1. นายธนวัฒน์ บุญมา เลขที่ 12</li>
+        <li>2. นางสาวศิริศิรา ขำเปลี่ยน เลขที่ 14</li>
+        <li>3. นางสาวเพ็ญพิชชา กาญจนระพีพรรณ เลขที่ 21</li>
+        <li>4. นายภูริภัทร กาละทอน เลขที่ 23</li>
+      </ul>
+    </div>
   </section>
 
   <script>
-    // แสดงเฉพาะ section ที่เลือก
-    function showSection(section) {
-      document.getElementById("ph").style.display = "none";
-      document.getElementById("poh").style.display = "none";
-      document.getElementById(section).style.display = "block";
+    // ฟังก์ชัน log10
+    function log10(x) {
+      return Math.log(x) / Math.log(10);
+    }
+
+    // สลับหน้าที่แสดง
+    function showSection(sectionId) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(sectionId).classList.add("active");
     }
 
     // ฟังก์ชันคำนวณ pH
-    function calculatePH() {
-      let h = parseFloat(document.getElementById("hValue").value);
-      if (h > 0) {
-        let ph = -Math.log10(h);
-        document.getElementById("phResult").innerText = "ค่า pH = " + ph.toFixed(2);
+    function calculatePH(type) {
+      let h;
+      if (type === 'sci') {
+        h = parseFloat(document.getElementById("hValueSci").value);
+        if (isNaN(h) || h <= 0) {
+          alert("กรุณากรอกค่า [H⁺] ที่ถูกต้อง (รูปแบบวิทยาศาสตร์)");
+          return;
+        }
+        document.getElementById("phResultSci").innerText = `ค่า pH = ${(-log10(h)).toFixed(2)}`;
       } else {
-        alert("กรุณากรอกค่าที่ถูกต้อง");
+        h = parseFloat(document.getElementById("hValueDec").value);
+        if (isNaN(h) || h <= 0) {
+          alert("กรุณากรอกค่า [H⁺] ที่ถูกต้อง (ทศนิยม)");
+          return;
+        }
+        document.getElementById("phResultDec").innerText = `ค่า pH = ${(-log10(h)).toFixed(2)}`;
       }
     }
 
     // ฟังก์ชันคำนวณ pOH
-    function calculatePOH() {
-      let oh = parseFloat(document.getElementById("ohValue").value);
-      if (oh > 0) {
-        let poh = -Math.log10(oh);
-        document.getElementById("pohResult").innerText = "ค่า pOH = " + poh.toFixed(2);
+    function calculatePOH(type) {
+      let oh;
+      if (type === 'sci') {
+        oh = parseFloat(document.getElementById("ohValueSci").value);
+        if (isNaN(oh) || oh <= 0) {
+          alert("กรุณากรอกค่า [OH⁻] ที่ถูกต้อง (รูปแบบวิทยาศาสตร์)");
+          return;
+        }
+        document.getElementById("pohResultSci").innerText = `ค่า pOH = ${(-log10(oh)).toFixed(2)}`;
       } else {
-        alert("กรุณากรอกค่าที่ถูกต้อง");
+        oh = parseFloat(document.getElementById("ohValueDec").value);
+        if (isNaN(oh) || oh <= 0) {
+          alert("กรุณากรอกค่า [OH⁻] ที่ถูกต้อง (ทศนิยม)");
+          return;
+        }
+        document.getElementById("pohResultDec").innerText = `ค่า pOH = ${(-log10(oh)).toFixed(2)}`;
       }
+    }
+
+    // ฟังก์ชันหาค่า pOH จาก pH
+    function calcFromPH() {
+      let ph = parseFloat(document.getElementById("phInput").value);
+      if (!isNaN(ph)) {
+        let poh = 14 - ph;
+        document.getElementById("fromPHResult").innerText = `ค่า pOH = ${poh.toFixed(2)}`;
+      } else {
+        alert("กรุณากรอกค่า pH ที่ถูกต้อง");
+      }
+    }
+
+    // ฟังก์ชันหาค่า pH จาก pOH
+    function calcFromPOH() {
+      let poh = parseFloat(document.getElementById("pohInput").value);
+      if (!isNaN(poh)) {
+        let ph = 14 - poh;
+        document.getElementById("fromPOHResult").innerText = `ค่า pH = ${ph.toFixed(2)}`;
+      } else {
+        alert("กรุณากรอกค่า pOH ที่ถูกต้อง");
+      }
+    }
+
+    // ฟังก์ชัน reset ช่องและคำตอบ
+    function resetField(inputId, resultId) {
+      document.getElementById(inputId).value = "";
+      document.getElementById(resultId).innerText = "";
     }
   </script>
 </body>
