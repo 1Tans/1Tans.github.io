@@ -101,6 +101,11 @@
     a:hover {
       text-decoration: underline;
     }
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -141,6 +146,14 @@
       </ul>
     </div>
 
+    <!-- ✅ เพิ่มรูปตารางค่า pH -->
+    <div class="box">
+      <h2>ตารางค่า pH</h2>
+      <p>ภาพแสดงช่วงค่าของ pH ตั้งแต่กรด → กลาง → เบส</p>
+      <img src="https://mesoestetic-th.com/wp-content/uploads/2022/11/shutterstock_1077782984.jpg" 
+           alt="pH scale" />
+    </div>
+
     <div class="box">
       <h2>หมายเหตุเรื่อง "e"</h2>
       <p>ทางคณะผู้จัดทำได้กำหนดให้ <b>e</b> หมายถึง <b>ยกกำลังสิบ</b> เพื่อความสะดวกในการพิมพ์ เช่น:</p>
@@ -160,7 +173,8 @@
       </ul>
     </div>
   </section>
-    <!-- 🔹 หน้าเครื่องคิดเลข -->
+
+  <!-- 🔹 หน้าเครื่องคิดเลข -->
   <section id="calc">
     <div class="box calc-box">
       <h2>คำนวณค่า pH</h2>
@@ -225,15 +239,21 @@
         <li>4. นายภูริภัทร กาละทอน เลขที่ 23</li>
       </ul>
     </div>
+    <div class="box">
+      <h2>ครูที่ปรึกษา</h2>
+      <ul>
+        <li>1. ครูภาวิณี ศรุติธาดา</li>
+        <li>2. ครูสุวิมล สร้อยสม</li>
+        <li>3. ครูชุติกาญจน์ เมตตาจิตร</li>
+      </ul>
+    </div>
   </section>
 
   <script>
-    // ฟังก์ชัน log10
     function log10(x) {
       return Math.log(x) / Math.log(10);
     }
 
-    // สลับหน้าที่แสดง
     function showSection(sectionId) {
       document.querySelectorAll("section").forEach((sec) => {
         sec.classList.remove("active");
@@ -241,7 +261,6 @@
       document.getElementById(sectionId).classList.add("active");
     }
 
-    // ฟังก์ชันคำนวณ pH
     function calculatePH(type) {
       let h, ph;
       if (type === "sci") {
@@ -265,7 +284,6 @@
       }
     }
 
-    // ฟังก์ชันคำนวณ pOH
     function calculatePOH(type) {
       let oh, poh;
       if (type === "sci") {
@@ -289,7 +307,6 @@
       }
     }
 
-    // ✅ ฟังก์ชันหาค่า pOH จาก pH (แยกอยู่นอก calcFromPH แล้ว)
     function calcFromPH() {
       const ph = parseFloat(document.getElementById("phInput").value);
       if (!isNaN(ph)) {
@@ -301,7 +318,6 @@
       }
     }
 
-    // ✅ ฟังก์ชันหาค่า pH จาก pOH (แยกฟังก์ชันออกมาเรียบร้อย)
     function calcFromPOH() {
       const poh = parseFloat(document.getElementById("pohInput").value);
       if (!isNaN(poh)) {
@@ -313,7 +329,6 @@
       }
     }
 
-    // ฟังก์ชัน reset ช่องและคำตอบ
     function resetField(inputId, resultId, methodId) {
       document.getElementById(inputId).value = "";
       document.getElementById(resultId).innerText = "";
